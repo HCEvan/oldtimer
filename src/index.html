@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Old Timer</title>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header__wrapper">
+                <h1 class="header__wrapper__title">Old Timer</h1>
+                <h3 class="header_wrapper__subtext">seconds to go...</h3>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="main__wrapper">
+                <div class="main__wrapper__counter">
+                    <div class="main__wrapper__counter__display">
+                        <h1 class="main__wrapper__counter__display__text">Time Left:</h1>
+                        <h1 class="main__wrapper__counter__display__time" id="display-time"></h1>
+                    </div>
+                    <div class="main__wrapper__counter__actions">
+                        <button class="main__wrapper__counter__actions__start" id="start-button">Start</button>
+                        <button class="main__wrapper__counter__actions__reset" id="reset-button">Reset</button>
+                    </div>
+                    <div class="main__wrapper__counter__add">
+                        <div class="main__wrapper__counter__add__small">
+                            <button class="main__wrapper__counter__add__small__button" id="add-small-10s">+ 10 Seconds</button>
+                            <button class="main__wrapper__counter__add__small__button" id="add-small-30s">+ 30 Seconds</button>
+                            <button class="main__wrapper__counter__add__small__button" id="add-small-1m">+ 1 Minute</button>
+                            <button class="main__wrapper__counter__add__small__button" id="add-small-3m">+ 3 Minutes</button>
+                        </div>
+                        <div class="main__wrapper__counter__add__large">
+                            <button class="main__wrapper__counter__add__large__button" id="add-large-5m">+ 5 Minutes</button>
+                            <button class="main__wrapper__counter__add__large__button" id="add-large-10m">+ 10 Minutes</button>
+                            <button class="main__wrapper__counter__add__large__button" id="add-large-30m">+ 30 Minutes</button>
+                            <button class="main__wrapper__counter__add__large__button" id="add-large-1h">+ 1 Hour</button>
+                        </div>
+                    </div>
+                    <div class="main__wrapper__counter__subtract">
+                        <div class="main__wrapper__counter__subtract__small">
+                            <button class="main__wrapper__counter__subtract__small__button" id="subtract-small-10s">- 10 Seconds</button>
+                            <button class="main__wrapper__counter__subtract__small__button" id="subtract-small-30s">- 30 Seconds</button>
+                            <button class="main__wrapper__counter__subtract__small__button" id="subtract-small-1m">- 1 Minute</button>
+                            <button class="main__wrapper__counter__subtract__small__button" id="subtract-small-3m">- 3 Minutes</button>
+                        </div>
+                        <div class="main__wrapper__counter__subtract__large">
+                            <button class="main__wrapper__counter__subtract__large__button" id="subtract-large-5m">- 5 Minutes</button>
+                            <button class="main__wrapper__counter__subtract__large__button" id="subtract-large-10m">- 10 Minutes</button>
+                            <button class="main__wrapper__counter__subtract__large__button" id="subtract-large-30m">- 30 Minutes</button>
+                            <button class="main__wrapper__counter__subtract__large__button" id="subtract-large-1h">- 1 Hour</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
