@@ -1,5 +1,6 @@
 // Start & Reset Elements
 const start = document.querySelector('#start-button');
+const stop = document.querySelector('#stop-button');
 const reset = document.querySelector('#reset-button');
 
 // Incrementing Elements
@@ -30,6 +31,7 @@ let hours = 0;
 let minutes = 0;
 let seconds = 0;
 
+// Formatter Helper Function
 const formatter = () => {
     if (seconds.toString().length === undefined || seconds.toString().length < 2) {
         seconds = "0" + seconds;
@@ -42,35 +44,52 @@ const formatter = () => {
     };
 };
 
+// Add & Remove Display Helper Functions
+const addDisplay = () => {
+    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+};
+
 const removeDisplay = () => {
     currentTime.removeChild(currentTime.firstChild);
 };
 
-const addDisplay = () => {
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+// Make Number Helper Function
+const makeNumber = unit => {
+    return typeof unit !== Number ? unit = parseInt(unit) : unit;
 };
 
 /*** START EVENT ***/
 start.addEventListener('click', () => {
     const countdown = setInterval(() => {
         removeDisplay();
+        
         typeof seconds !== Number ? seconds = parseInt(seconds) : console.log(typeof seconds);
+        typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
+        typeof hours !== Number ? hours = parseInt(hours) : console.log(typeof hours); 
 
         if (seconds >= 1) {
             seconds--;
+            console.log('1');
         } else if (seconds === 0 && minutes >= 1) {
             minutes--;
             seconds = seconds-- + 59;
+            console.log('2');
         } else if (seconds === 0 && minutes === 0 && hours >= 1) {
             hours--;
-            seconds = seconds-- + 59;
-            minutes = minutes-- + 59;
-        } else if (seconds == 0 && minutes == 0 && hours == 0) {
+            seconds = 59;
+            minutes = 59;
+            console.log('3');
+        } else if (seconds === 0 && minutes === 0 && hours === 0) {
             clearInterval(countdown);
+            console.log('4');
         };
 
+        /*** STOP EVENT ***/
+        stop.addEventListener('click', () => {
+            clearInterval(countdown);
+        });
+
         formatter();
-        console.log(seconds);
         addDisplay();
     }, 1000);
     
