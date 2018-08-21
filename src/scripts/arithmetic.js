@@ -1,6 +1,5 @@
-const currentTime = document.querySelector('#display-time');
-
-// Reset Elements
+// Start & Reset Elements
+const start = document.querySelector('#start-button');
 const reset = document.querySelector('#reset-button');
 
 // Incrementing Elements
@@ -23,6 +22,10 @@ const subtractTenMin = document.querySelector('#subtract-large-10m');
 const subtractThirtyMin = document.querySelector('#subtract-large-30m');
 const subtractHour = document.querySelector('#subtract-large-1h');
 
+// Display Element
+const currentTime = document.querySelector('#display-time');
+
+// Units of Time
 let hours = 0;
 let minutes = 0;
 let seconds = 0;
@@ -39,21 +42,55 @@ const formatter = () => {
     };
 };
 
+const removeDisplay = () => {
+    currentTime.removeChild(currentTime.firstChild);
+};
+
+const addDisplay = () => {
+    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+};
+
+/*** START EVENT ***/
+start.addEventListener('click', () => {
+    const countdown = setInterval(() => {
+        removeDisplay();
+        typeof seconds !== Number ? seconds = parseInt(seconds) : console.log(typeof seconds);
+
+        if (seconds >= 1) {
+            seconds--;
+        } else if (seconds === 0 && minutes >= 1) {
+            minutes--;
+            seconds = seconds-- + 59;
+        } else if (seconds === 0 && minutes === 0 && hours >= 1) {
+            hours--;
+            seconds = seconds-- + 59;
+            minutes = minutes-- + 59;
+        } else if (seconds == 0 && minutes == 0 && hours == 0) {
+            clearInterval(countdown);
+        };
+
+        formatter();
+        console.log(seconds);
+        addDisplay();
+    }, 1000);
+    
+});
+
 /*** RESET EVENT ***/
 reset.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     
     hours = 0;
     minutes = 0;
     seconds = 0;
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 /*** INCREMENT EVENTS ***/
 addTenSec.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof seconds !== Number ? seconds = parseInt(seconds) : console.log(typeof seconds); 
     
     if (seconds <= 49) { 
@@ -69,11 +106,11 @@ addTenSec.addEventListener('click', () => {
     };
     
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 addThirtySec.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof seconds !== Number ? seconds = parseInt(seconds) : console.log(typeof seconds); 
     
     if (seconds <= 29) { 
@@ -89,11 +126,11 @@ addThirtySec.addEventListener('click', () => {
     };
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 addOneMin.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
     
     if (minutes <= 58) { 
@@ -104,11 +141,11 @@ addOneMin.addEventListener('click', () => {
     }
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 addThreeMin.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
     
     if (minutes <= 56) { 
@@ -119,11 +156,11 @@ addThreeMin.addEventListener('click', () => {
     }
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 addFiveMin.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
     
     if (minutes <= 54) { 
@@ -134,11 +171,11 @@ addFiveMin.addEventListener('click', () => {
     }
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 addTenMin.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
     
     if (minutes <= 49) { 
@@ -149,11 +186,11 @@ addTenMin.addEventListener('click', () => {
     };
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 addThirtyMin.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
     
     if (minutes <= 29) { 
@@ -164,21 +201,21 @@ addThirtyMin.addEventListener('click', () => {
     }
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 addHour.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof hours !== Number ? hours = parseInt(hours) : console.log(typeof hours); 
     hours += 1;
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 /*** DECREMENT EVENTS ***/
 subtractTenSec.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof seconds !== Number ? seconds = parseInt(seconds) : console.log(typeof seconds); 
     
     if (seconds >= 11) { 
@@ -203,11 +240,11 @@ subtractTenSec.addEventListener('click', () => {
     };
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 subtractThirtySec.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof seconds !== Number ? seconds = parseInt(seconds) : console.log(typeof seconds); 
     
     if (seconds >= 31) { 
@@ -232,11 +269,11 @@ subtractThirtySec.addEventListener('click', () => {
     };
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 subtractOneMin.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
     
     if (minutes >= 2) { 
@@ -253,11 +290,11 @@ subtractOneMin.addEventListener('click', () => {
     };
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 subtractThreeMin.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
     
     if (minutes >= 4) { 
@@ -283,11 +320,11 @@ subtractThreeMin.addEventListener('click', () => {
     };
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 subtractFiveMin.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
     
     if (minutes >= 6) { 
@@ -312,11 +349,11 @@ subtractFiveMin.addEventListener('click', () => {
     };
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 subtractTenMin.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
     
     if (minutes >= 11) { 
@@ -341,11 +378,11 @@ subtractTenMin.addEventListener('click', () => {
     };
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 subtractThirtyMin.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
     
     if (minutes >= 31) { 
@@ -370,11 +407,11 @@ subtractThirtyMin.addEventListener('click', () => {
     };
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
 
 subtractHour.addEventListener('click', () => {
-    currentTime.firstChild ? currentTime.removeChild(currentTime.firstChild) : console.log(currentTime.firstChild);
+    removeDisplay();
     typeof hours !== Number ? hours = parseInt(hours) : console.log(typeof hours); 
     
     if (hours >= 2) { 
@@ -387,5 +424,5 @@ subtractHour.addEventListener('click', () => {
     };
 
     formatter();
-    currentTime.appendChild(document.createTextNode(`${hours} : ${minutes} : ${seconds}`));
+    addDisplay();
 });
