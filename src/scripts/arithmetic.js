@@ -31,6 +31,9 @@ let hours = 0;
 let minutes = 0;
 let seconds = 0;
 
+// Countdown
+let countdown;
+
 // Formatter Helper Function
 const formatter = () => {
     if (seconds.toString().length === undefined || seconds.toString().length < 2) {
@@ -60,12 +63,12 @@ const makeNumber = unit => {
 
 /*** START EVENT ***/
 start.addEventListener('click', () => {
-    const countdown = setInterval(() => {
+    countdown = setInterval(() => {
         removeDisplay();
-        
-        typeof seconds !== Number ? seconds = parseInt(seconds) : console.log(typeof seconds);
-        typeof minutes !== Number ? minutes = parseInt(minutes) : console.log(typeof minutes); 
-        typeof hours !== Number ? hours = parseInt(hours) : console.log(typeof hours); 
+
+        seconds = makeNumber(seconds);
+        minutes = makeNumber(minutes);
+        hours = makeNumber(hours);
 
         if (seconds >= 1) {
             seconds--;
@@ -84,15 +87,21 @@ start.addEventListener('click', () => {
             console.log('4');
         };
 
-        /*** STOP EVENT ***/
-        stop.addEventListener('click', () => {
-            clearInterval(countdown);
-        });
-
         formatter();
         addDisplay();
     }, 1000);
     
+});
+
+/*** STOP EVENT ***/
+stop.addEventListener('click', () => {
+    if (!countdown) {
+        return;
+    }
+
+    clearInterval(countdown);
+
+    countdown = undefined;
 });
 
 /*** RESET EVENT ***/
